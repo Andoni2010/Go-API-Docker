@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API en Go con Docker y Docker Compose</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        pre {
-            background-color: #2e2e2e;
-            color: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            color: #ff9e00;
-        }
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        .highlight {
-            color: #ff9e00;
-        }
-    </style>
-</head>
+
 <body>
     <div class="container">
         <h1>📄 API en Go con Docker y Docker Compose</h1>
