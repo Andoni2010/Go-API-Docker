@@ -112,3 +112,23 @@ docker-compose down
 - Crear rutas más complejas
 - Agregar autenticación
 - Implementar pruebas unitarias
+
+## 📖 Glosario de Términos Clave en Docker y Go
+
+### 🐳 **Docker**
+- **Dockerfile** → Archivo con instrucciones para construir una imagen (FROM, COPY, RUN, CMD)
+- **Imagen** → Molde base para crear contenedores (`docker build`)
+- **Contenedor** → Instancia en ejecución de una imagen (`docker run`)
+- **`docker build -t <nombre>`** → Construye imagen desde Dockerfile
+- **`docker run -p <local>:<contenedor>`** → Ejecuta contenedor con mapeo de puertos
+- **`docker ps`** → Lista contenedores activos
+- **`docker stop <id>`** → Detiene contenedor en ejecución
+- **`docker rm <id>`** → Elimina contenedor detenido
+- **`docker rmi <imagen>`** → Elimina imagen local
+
+### 🐹 **Go (Golang)**
+- **`net/http`** → Paquete para crear servidores/cliente HTTP
+- **`http.HandleFunc`** → Registra handler para endpoint HTTP
+- **`http.ListenAndServe`** → Inicia servidor web en puerto específico
+- **`fmt.Println`** → Imprime texto en consola
+- **`main()`** → Función principal de ejecución del programa
