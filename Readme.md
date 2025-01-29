@@ -1,119 +1,115 @@
+# 📄 API en Go con Docker y Docker Compose
 
-<body>
-    <div class="container">
-        <h1>📄 API en Go con Docker y Docker Compose</h1>
-        <p>Una API simple en Go contenerizada con Docker y gestionada con Docker Compose. Este proyecto está orientado a demostrar cómo contenerizar una aplicación básica en Go y gestionarla a través de Docker y Docker Compose, permitiendo una implementación flexible y escalable.</p>
+Una API simple en Go contenerizada con Docker y gestionada con Docker Compose. Este proyecto está orientado a demostrar cómo contenerizar una aplicación básica en Go y gestionarla a través de Docker y Docker Compose, permitiendo una implementación flexible y escalable.
 
-        <h2>📋 Descripción</h2>
-        <p>La API en Go cuenta con dos endpoints:</p>
-        <ul>
-            <li><code>/ping</code>: Responde con "pong".</li>
-            <li><code>/status</code>: Muestra el número de visitas y la configuración del puerto.</li>
-        </ul>
-        <p><strong>Características principales:</strong></p>
-        <ul>
-            <li>Empaquetado en contenedor Docker.</li>
-            <li>Configuración mediante variables de entorno.</li>
-            <li>Contador de visitas en memoria (sin persistencia).</li>
-            <li>Gestión de contenedores con Docker Compose.</li>
-        </ul>
+## 📋 Descripción
+API en Go con dos endpoints:
+- /ping: Responde con "pong"
+- /status: Muestra el número de visitas y configuración del puerto
 
-        <h2>🛠 Tecnologías utilizadas</h2>
-        <ul>
-            <li><strong>Go</strong>: Lenguaje principal de desarrollo de la API.</li>
-            <li><strong>Docker</strong>: Contenerización de la aplicación y sus dependencias.</li>
-            <li><strong>Docker Compose</strong>: Orquestación de contenedores para facilitar el despliegue y gestión de servicios.</li>
-            <li><strong>Variables de entorno</strong>: Configuración del puerto de la aplicación.</li>
-        </ul>
+Características principales:
+- Empaquetado en contenedor Docker
+- Configuración mediante variables de entorno
+- Contador de visitas en memoria
+- Gestión con Docker Compose
 
-        <h2>📁 Estructura del proyecto</h2>
-        <pre>
+## 🛠 Tecnologías utilizadas
+- **Go**: Lenguaje principal de desarrollo
+- **Docker**: Contenerización de la aplicación
+- **Docker Compose**: Orquestación de contenedores
+- **Variables de entorno**: Configuración del puerto
+
+## 📁 Estructura del proyecto
+
 go-docker-api/
 ├── Dockerfile
 ├── docker-compose.yml
 ├── main.go
 └── go.mod
-        </pre>
 
-        <h2>📄 Detalles del código</h2>
 
-        <h3>main.go</h3>
-        <p>Define dos endpoints simples en Go:</p>
-        <pre>
-        // Endpoint /ping
-        http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-            fmt.Fprint(w, "pong")
-        })
 
-        // Endpoint /status
-        http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
-            visitCount++
-            fmt.Fprintf(w, "Visitas: %d\nPuerto: %s", visitCount, port)
-        })
-        </pre>
+## 📄 Detalles del código
 
-        <h3>Dockerfile</h3>
-        <p>Define la construcción de la imagen Docker para la API:</p>
-        <pre>
-        FROM golang:1.21-alpine
-        WORKDIR /app
-        COPY go.mod ./
-        RUN go mod download
-        COPY *.go ./
-        RUN CGO_ENABLED=0 GOOS=linux go build -o /go-docker-api
-        EXPOSE 8080
-        CMD ["/go-docker-api"]
-        </pre>
+### main.go
+- Define los endpoints:
+- 
+  
+go
+  // Endpoint /ping
+  http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+      fmt.Fprint(w, "pong")
+  })
+  
+  // Endpoint /status
+  http.HandleFunc("/status", func(w http.ResponseWriter, r *http.Request) {
+      visitCount++
+      fmt.Fprintf(w, "Visitas: %d\nPuerto: %s", visitCount, port)
+  })
 
-        <h3>docker-compose.yml</h3>
-        <p>Configura el servicio de la API con Docker Compose:</p>
-        <pre>
-        version: '3.8'
-        services:
-          api:
-            build: .
-            ports:
-              - "8080:8080"
-            environment:
-              - PORT=8080
-        </pre>
+### Dockerfile
+  
+  
+FROM golang:1.21-alpine
+  WORKDIR /app
+  COPY go.mod ./
+  RUN go mod download
+  COPY *.go ./
+  RUN CGO_ENABLED=0 GOOS=linux go build -o /go-docker-api
+  EXPOSE 8080
+  CMD ["/go-docker-api"]
 
-        <h2>🚀 Instrucciones de ejecución</h2>
-        <h3>Construir la imagen</h3>
-        <pre><code>docker-compose build</code></pre>
+### docker-compose.yml
+  
+  
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
 
-        <h3>Iniciar el contenedor</h3>
-        <pre><code>docker-compose up</code></pre>
 
-        <h3>Acceder a la API</h3>
-        <p>Prueba los siguientes endpoints:</p>
-        <pre><code># Endpoint /ping</code>
-        curl http://localhost:8080/ping
-        <code># Endpoint /status</code>
-        curl http://localhost:8080/status
-        </pre>
 
-        <h3>Detener el contenedor</h3>
-        <pre><code>docker-compose down</code></pre>
+## 🚀 Instrucciones de ejecución
 
-        <h2>✅ Lo que aprendí</h2>
-        <ul>
-            <li>Contenerización de aplicaciones en Go con Docker.</li>
-            <li>Uso de Docker Compose para la gestión de contenedores.</li>
-            <li>Configuración de variables de entorno para el despliegue de la API.</li>
-            <li>Optimización y gestión de la infraestructura de contenedores.</li>
-        </ul>
+### Construir la imagen
+  
+bash
+  docker-compose build
 
-        <h2>🔜 Próximos pasos</h2>
-        <ul>
-            <li>Agregar persistencia de datos (SQLite/MySQL).</li>
-            <li>Implementar sistema de logs.</li>
-            <li>Añadir validación de datos en los endpoints.</li>
-            <li>Mejorar el manejo de errores con respuestas más detalladas.</li>
-            <li>Crear rutas más complejas para la API.</li>
-            <li>Agregar autenticación con tokens o sesiones.</li>
-            <li>Implementar pruebas unitarias y de integración para los endpoints.</li>
-        </ul>
-    </div>
-</body>
-</html>
+### Iniciar el contenedor
+  
+bash
+  docker-compose up
+
+### Acceder a la API
+  
+bash
+  # Endpoint /ping
+  curl http://localhost:8080/ping
+  
+  # Endpoint /status
+  curl http://localhost:8080/status
+
+### Detener el contenedor
+  
+bash
+docker-compose down
+
+## ✅ Lo que aprendí
+- **Go**: Lenguaje principal de desarrollo
+- **Docker**: Contenerización de la aplicación
+- **Docker Compose**: Orquestación de contenedores
+- **Variables de entorno**: Configuración del puerto
+
+## 🔜 Próximos pasos
+- Agregar persistencia de datos (SQLite/MySQL)
+- Implementar sistema de logs
+- Añadir validación de datos
+- Mejorar el manejo de errores
+- Crear rutas más complejas
+- Agregar autenticación
+- Implementar pruebas unitarias
