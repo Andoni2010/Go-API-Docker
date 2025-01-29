@@ -20,22 +20,21 @@ Características principales:
 - **Variables de entorno**: Configuración del puerto
 
 ## 📁 Estructura del proyecto
-
+```
 go-docker-api/
 ├── Dockerfile
 ├── docker-compose.yml
 ├── main.go
 └── go.mod
-
+```
 
 
 ## 📄 Detalles del código
 
 ### main.go
 - Define los endpoints:
-- 
   
-go
+```go
   // Endpoint /ping
   http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
       fmt.Fprint(w, "pong")
@@ -46,10 +45,10 @@ go
       visitCount++
       fmt.Fprintf(w, "Visitas: %d\nPuerto: %s", visitCount, port)
   })
-
+```
 ### Dockerfile
   
-  
+```  
 FROM golang:1.21-alpine
   WORKDIR /app
   COPY go.mod ./
@@ -58,10 +57,10 @@ FROM golang:1.21-alpine
   RUN CGO_ENABLED=0 GOOS=linux go build -o /go-docker-api
   EXPOSE 8080
   CMD ["/go-docker-api"]
-
+```
 ### docker-compose.yml
   
-  
+```  
 version: '3.8'
 services:
   api:
@@ -70,35 +69,35 @@ services:
       - "8080:8080"
     environment:
       - PORT=8080
-
+```
 
 
 ## 🚀 Instrucciones de ejecución
 
 ### Construir la imagen
   
-bash
+```bash
   docker-compose build
-
+```
 ### Iniciar el contenedor
   
-bash
+```bash
   docker-compose up
-
+```
 ### Acceder a la API
   
-bash
+```bash
   # Endpoint /ping
   curl http://localhost:8080/ping
   
   # Endpoint /status
   curl http://localhost:8080/status
-
+```
 ### Detener el contenedor
   
-bash
+```bash
 docker-compose down
-
+```
 ## ✅ Lo que aprendí
 - **Go**: Lenguaje principal de desarrollo
 - **Docker**: Contenerización de la aplicación
